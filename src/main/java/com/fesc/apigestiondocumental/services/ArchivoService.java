@@ -21,10 +21,10 @@ import com.fesc.apigestiondocumental.data.repositorios.IEncargadoRepository;
 import com.fesc.apigestiondocumental.data.repositorios.IEstudianteRepository;
 import com.fesc.apigestiondocumental.data.repositorios.IInfoArchivoRepository;
 import com.fesc.apigestiondocumental.data.repositorios.IUsuarioRepository;
-import com.fesc.apigestiondocumental.shared.DocumentoDto;
+import com.fesc.apigestiondocumental.shared.ArchivoDto;
 
 @Service
-public class DocumentoService implements IDocumentoService{
+public class ArchivoService implements IArchivoService{
 
     @Autowired
     IArchivoRepository iArchivoRepository;
@@ -48,38 +48,42 @@ public class DocumentoService implements IDocumentoService{
     ModelMapper modelMapper;
 
     @Override
-    public DocumentoDto crearDocumento(DocumentoDto documentoDto) {
+    public ArchivoDto crearArchivo(ArchivoDto archivoDto) {
 
-        ArchivoEntity archivoEntity = modelMapper.map(documentoDto, ArchivoEntity.class);
+        ArchivoEntity archivoEntity = modelMapper.map(archivoDto, ArchivoEntity.class);
         archivoEntity.setIdArchivo(UUID.randomUUID().toString());
+        archivoEntity.setDatos(obtenerBytesArchivo());
         
-        try {
-            Path path = Path.of("C:/Users/usuario/Downloads/EJERCICIODEREFUERZO.pdf");
-            archivoEntity.setDatos(Files.readAllBytes(path));
-        } catch (IOException e) {
-            archivoEntity.setDatos(null);
-        }
+        UsuarioEntity usuarioEntity = iUsuarioRepository.findByUsername(archivoDto.getInfoArchivoEntity().getUsername());
+        EstudianteEntity estudianteEntity = iEstudianteRepository.findByIdEstudiante(archivoDto.getInfoArchivoEntity().getEstudiante());
+        EncargadoEntity encargadoEntity = iEncargadoRepository.findByIdEncargado(archivoDto.getInfoArchivoEntity().getEncargado());
+        EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(archivoDto.getInfoArchivoEntity().getEmpresa());
 
-        UsuarioEntity usuarioEntity = iUsuarioRepository.findByUsername(documentoDto.getUsername());
-        EstudianteEntity estudianteEntity = iEstudianteRepository.findByIdEstudiante(documentoDto.getEstudiante());
-        EncargadoEntity encargadoEntity = iEncargadoRepository.findByIdEncargado(documentoDto.getEncargado());
-        EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(documentoDto.getEmpresa());
-
-        ArchivoEntity archivoEntityCreado = iArchivoRepository.save(archivoEntity);
-
-        InfoArchivoEntity infoArchivoEntity = modelMapper.map(documentoDto, InfoArchivoEntity.class);
+        InfoArchivoEntity infoArchivoEntity = modelMapper.map(archivoDto.getInfoArchivoEntity(), InfoArchivoEntity.class);
         infoArchivoEntity.setIdInfoArchivo(UUID.randomUUID().toString());
-        infoArchivoEntity.setArchivoEntity(archivoEntityCreado);
         infoArchivoEntity.setUsuarioEntity(usuarioEntity);
         infoArchivoEntity.setEstudianteEntity(estudianteEntity);
         infoArchivoEntity.setEmpresaEntity(empresaEntity);
         infoArchivoEntity.setEncargadoEntity(encargadoEntity);
+        infoArchivoEntity.setPeso(String.valueOf(archivoEntity.getDatos().length));
 
         InfoArchivoEntity infoArchivoEntityCreado = iInfoArchivoRepository.save(infoArchivoEntity);
 
-        DocumentoDto documentoDtocreado = modelMapper.map(infoArchivoEntityCreado, DocumentoDto.class);
+        archivoEntity.setInfoArchivoEntity(infoArchivoEntityCreado);
+        ArchivoEntity archivoEntityCreado = iArchivoRepository.save(archivoEntity);
+
+        ArchivoDto archivoDtoCreado = modelMapper.map(archivoEntityCreado, ArchivoDto.class);
         
-        return documentoDtocreado;
+        return archivoDtoCreado;
+    }
+
+    public byte[] obtenerBytesArchivo() {
+        try {
+            Path path = Path.of("C:/Users/usuario/Downloads/EJERCICIODEREFUERZO.pdf");
+            return Files.readAllBytes(path);
+        } catch (IOException e) {
+            return null;
+        }
     }
     
 }

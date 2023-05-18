@@ -4,6 +4,7 @@ public class ArchivoDataRestModel {
     
     private String idArchivo;
     private byte[] datos;
+    private InfoArchivoDataRestModel infoArchivoEntity;
 
     public ArchivoDataRestModel() {
     }
@@ -22,6 +23,14 @@ public class ArchivoDataRestModel {
 
     public void setDatos(byte[] datos) {
         this.datos = datos;
+    }
+
+    public InfoArchivoDataRestModel getInfoArchivoEntity() {
+        return infoArchivoEntity;
+    }
+
+    public void setInfoArchivoEntity(InfoArchivoDataRestModel infoArchivoEntity) {
+        this.infoArchivoEntity = infoArchivoEntity;
     }
 
     

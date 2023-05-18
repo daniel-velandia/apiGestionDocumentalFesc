@@ -10,6 +10,7 @@ public class InfoArchivoDto implements Serializable{
     private long id;
     private String idInfoArchivo;
     private String nombre;
+    private String peso;
     private Date fecha;
     private String numRadicado;
     private boolean tipoRadicado;
@@ -17,6 +18,11 @@ public class InfoArchivoDto implements Serializable{
     private String asunto;
     private String anexos;
     private boolean reqRespuesta;
+    private String estudiante;
+    private String empresa;
+    private String encargado;
+    private String respuesta;
+    private String username;
     private EstudianteDto estudianteEntity;
     private EmpresaDto empresaEntity;
     private EncargadoDto encargadoEntity;
@@ -52,6 +58,14 @@ public class InfoArchivoDto implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
     }
 
     public Date getFecha() {
@@ -108,6 +122,46 @@ public class InfoArchivoDto implements Serializable{
 
     public void setReqRespuesta(boolean reqRespuesta) {
         this.reqRespuesta = reqRespuesta;
+    }
+
+    public String getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(String estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getEncargado() {
+        return encargado;
+    }
+
+    public void setEncargado(String encargado) {
+        this.encargado = encargado;
+    }
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public EstudianteDto getEstudianteEntity() {

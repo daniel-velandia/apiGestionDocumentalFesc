@@ -30,6 +30,9 @@ public class InfoArchivoEntity implements Serializable {
     
     @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
+    private String peso;
     
     @CreatedDate
     private Date fecha;
@@ -71,10 +74,6 @@ public class InfoArchivoEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuarioEntity;
-    
-    @OneToOne
-    @JoinColumn(name = "id_archivo")
-    private ArchivoEntity archivoEntity;
 
     public static long getSerialversionuid() {
         return SerialVersionUID;
@@ -102,6 +101,14 @@ public class InfoArchivoEntity implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getPeso() {
+        return peso;
+    }
+
+    public void setPeso(String peso) {
+        this.peso = peso;
     }
 
     public Date getFecha() {
@@ -198,14 +205,6 @@ public class InfoArchivoEntity implements Serializable {
 
     public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
         this.usuarioEntity = usuarioEntity;
-    }
-
-    public ArchivoEntity getArchivoEntity() {
-        return archivoEntity;
-    }
-
-    public void setArchivoEntity(ArchivoEntity archivoEntity) {
-        this.archivoEntity = archivoEntity;
     }
 
     

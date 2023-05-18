@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class DocumentoCrearRequestModel {
+public class ArchivoCrearRequestModel {
     
     private String nombre;
     private byte[] datos;
@@ -15,7 +15,7 @@ public class DocumentoCrearRequestModel {
     private String encargado;
     private String respuesta;
 
-    public DocumentoCrearRequestModel() {
+    public ArchivoCrearRequestModel() {
     }
 
     public String getNombre() {
