@@ -38,6 +38,6 @@ public class EncargadoEntity extends PersonaEntity{
     public void setArea(String area) {
         this.area = area;
     }
-    
+
     
 }

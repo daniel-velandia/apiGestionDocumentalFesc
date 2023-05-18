@@ -32,6 +32,6 @@ public class EncargadoDto extends PersonaDto{
     public void setArea(String area) {
         this.area = area;
     }
-    
+
     
 }

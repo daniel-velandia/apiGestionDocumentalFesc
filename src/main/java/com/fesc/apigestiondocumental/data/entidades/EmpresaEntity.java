@@ -20,7 +20,7 @@ public class EmpresaEntity implements Serializable{
     private String idEmpresa;
 
     @Column(nullable = false)
-    private String nombreEmpresa;
+    private String nomEmpresa;
 
     @Column(nullable = false)
     private String nit;
@@ -54,12 +54,12 @@ public class EmpresaEntity implements Serializable{
         this.idEmpresa = idEmpresa;
     }
 
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
+    public String getNomEmpresa() {
+        return nomEmpresa;
     }
 
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
+    public void setNomEmpresa(String nomEmpresa) {
+        this.nomEmpresa = nomEmpresa;
     }
 
     public String getNit() {

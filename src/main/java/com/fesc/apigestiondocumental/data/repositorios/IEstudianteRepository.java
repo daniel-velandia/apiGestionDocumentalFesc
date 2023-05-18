@@ -4,7 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.fesc.apigestiondocumental.data.entidades.EstudianteEntity;
 
+
 public interface IEstudianteRepository extends CrudRepository<EstudianteEntity, Long>{
     
-    public EstudianteEntity findByIdEstudiante(String id);
+    public EstudianteEntity findByIdEstudiante(String idEstudiante);
 }

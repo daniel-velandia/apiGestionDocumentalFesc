@@ -2,7 +2,7 @@ package com.fesc.apigestiondocumental.models.peticiones;
 
 public class EmpresaCrearRequestModel {
 
-    private String nombreEmpresa;
+    private String nomEmpresa;
     private String nit;
     private String correo;
     private String telefono;
@@ -11,11 +11,11 @@ public class EmpresaCrearRequestModel {
     public EmpresaCrearRequestModel() {
     }
 
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
+    public String getNomEmpresa() {
+        return nomEmpresa;
     }
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
+    public void setNomEmpresa(String nomEmpresa) {
+        this.nomEmpresa = nomEmpresa;
     }
     public String getNit() {
         return nit;

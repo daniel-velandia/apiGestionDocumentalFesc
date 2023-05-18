@@ -112,6 +112,6 @@ public class UsuarioDto implements Serializable{
     public void setPasswordEncriptada(String passwordEncriptada) {
         this.passwordEncriptada = passwordEncriptada;
     }
-    
+
     
 }

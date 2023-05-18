@@ -32,5 +32,6 @@ public class EstudianteDetalleDataRestModel extends PersonaDataRestModel{
     public void setSemestre(String semestre) {
         this.semestre = semestre;
     }
+
     
 }
