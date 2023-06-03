@@ -2,11 +2,19 @@ package com.fesc.apigestiondocumental.models.respuestas;
 
 public class ArchivoDataRestModel {
     
+    private long id;
     private String idArchivo;
     private byte[] datos;
-    private InfoArchivoDataRestModel infoArchivoEntity;
 
     public ArchivoDataRestModel() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getIdArchivo() {
@@ -23,14 +31,6 @@ public class ArchivoDataRestModel {
 
     public void setDatos(byte[] datos) {
         this.datos = datos;
-    }
-
-    public InfoArchivoDataRestModel getInfoArchivoEntity() {
-        return infoArchivoEntity;
-    }
-
-    public void setInfoArchivoEntity(InfoArchivoDataRestModel infoArchivoEntity) {
-        this.infoArchivoEntity = infoArchivoEntity;
     }
 
     

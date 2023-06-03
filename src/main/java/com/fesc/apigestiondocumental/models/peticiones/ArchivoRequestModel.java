@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class ArchivoCrearRequestModel {
+public class ArchivoRequestModel {
     
     private String nombre;
     private byte[] datos;
@@ -14,8 +14,9 @@ public class ArchivoCrearRequestModel {
     private String empresa;
     private String encargado;
     private String respuesta;
+    private boolean informarEncargado;
 
-    public ArchivoCrearRequestModel() {
+    public ArchivoRequestModel() {
     }
 
     public String getNombre() {
@@ -114,5 +115,12 @@ public class ArchivoCrearRequestModel {
         this.respuesta = respuesta;
     }
 
+    public boolean isInformarEncargado() {
+        return informarEncargado;
+    }
+
+    public void setInformarEncargado(boolean informarEncargado) {
+        this.informarEncargado = informarEncargado;
+    }
     
 }

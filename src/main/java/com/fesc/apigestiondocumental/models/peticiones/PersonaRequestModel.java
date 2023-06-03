@@ -2,11 +2,11 @@ package com.fesc.apigestiondocumental.models.peticiones;
 
 public class PersonaRequestModel {
     
-    private String documento;
-    private String nombre;
-    private String apellido;
-    private String correo;
-    private String telefono;
+    protected String documento;
+    protected String nombre;
+    protected String apellido;
+    protected String correo;
+    protected String telefono;
     
     public PersonaRequestModel() {
     }

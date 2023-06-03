@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class UsuarioCrearRequestModel {
+public class UsuarioRequestModel {
     
     private String documento;
     private String username;
@@ -11,7 +11,7 @@ public class UsuarioCrearRequestModel {
     private String cargo;
     private String password;
 
-    public UsuarioCrearRequestModel() {
+    public UsuarioRequestModel() {
     }
 
     public String getDocumento() {

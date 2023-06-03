@@ -1,24 +1,36 @@
 package com.fesc.apigestiondocumental.models.respuestas;
 
-public class EstudianteDataRestModel {
+public class EstudianteDataRestModel extends PersonaDataRestModel{
     
-    private String nombre;
+    private String idEstudiante;
     private String carrera;
-
+    private String semestre;
+    
     public EstudianteDataRestModel() {
     }
-    
-    public String getNombre() {
-        return nombre;
+
+    public String getIdEstudiante() {
+        return idEstudiante;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public void setIdEstudiante(String idEstudiante) {
+        this.idEstudiante = idEstudiante;
     }
+
     public String getCarrera() {
         return carrera;
     }
+
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
     

@@ -1,6 +1,7 @@
 package com.fesc.apigestiondocumental.shared;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class EmpresaDto implements Serializable{
 
@@ -13,6 +14,9 @@ public class EmpresaDto implements Serializable{
     private String correo;
     private String telefono;
     private String nombreAsistente;
+    private LocalDate creado;
+    private String username;
+    private UsuarioDto usuarioEntity;
 
     public EmpresaDto() {
     }
@@ -75,6 +79,30 @@ public class EmpresaDto implements Serializable{
 
     public void setNombreAsistente(String nombreAsistente) {
         this.nombreAsistente = nombreAsistente;
+    }
+
+    public LocalDate getCreado() {
+        return creado;
+    }
+
+    public void setCreado(LocalDate creado) {
+        this.creado = creado;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public UsuarioDto getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    public void setUsuarioEntity(UsuarioDto usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
     }
 
     

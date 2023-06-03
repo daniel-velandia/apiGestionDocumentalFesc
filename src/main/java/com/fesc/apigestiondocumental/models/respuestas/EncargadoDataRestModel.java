@@ -1,23 +1,36 @@
 package com.fesc.apigestiondocumental.models.respuestas;
 
-public class EncargadoDataRestModel {
+public class EncargadoDataRestModel extends PersonaDataRestModel{
     
-    private String nombre;
+    private String idEncargado;
     private String cargo;
+    private String area;
     
     public EncargadoDataRestModel() {
     }
-    public String getNombre() {
-        return nombre;
+
+    public String getIdEncargado() {
+        return idEncargado;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public void setIdEncargado(String idEncargado) {
+        this.idEncargado = idEncargado;
     }
+
     public String getCargo() {
         return cargo;
     }
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     

@@ -6,9 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
 
 @Entity(name = "archivo")
 public class ArchivoEntity implements Serializable {
@@ -25,10 +23,6 @@ public class ArchivoEntity implements Serializable {
     @Lob
     @Column(name = "datos", columnDefinition = "MEDIUMBLOB", nullable = false)
     private byte[] datos;
-
-    @OneToOne
-    @JoinColumn(name = "id_info_archivo")
-    private InfoArchivoEntity infoArchivoEntity;
 
     public static long getSerialversionuid() {
         return SerialVersionUID;
@@ -56,14 +50,6 @@ public class ArchivoEntity implements Serializable {
 
     public void setDatos(byte[] datos) {
         this.datos = datos;
-    }
-
-    public InfoArchivoEntity getInfoArchivoEntity() {
-        return infoArchivoEntity;
-    }
-
-    public void setInfoArchivoEntity(InfoArchivoEntity infoArchivoEntity) {
-        this.infoArchivoEntity = infoArchivoEntity;
     }
 
     

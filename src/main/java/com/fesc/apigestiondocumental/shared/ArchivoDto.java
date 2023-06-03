@@ -9,7 +9,6 @@ public class ArchivoDto implements Serializable{
     private long id;
     private String idArchivo;
     private byte[] datos;
-    private InfoArchivoDto infoArchivoEntity;
 
     public ArchivoDto() {
     }
@@ -40,14 +39,6 @@ public class ArchivoDto implements Serializable{
 
     public void setDatos(byte[] datos) {
         this.datos = datos;
-    }
-
-    public InfoArchivoDto getInfoArchivoEntity() {
-        return infoArchivoEntity;
-    }
-
-    public void setInfoArchivoEntity(InfoArchivoDto infoArchivoEntity) {
-        this.infoArchivoEntity = infoArchivoEntity;
     }
     
     

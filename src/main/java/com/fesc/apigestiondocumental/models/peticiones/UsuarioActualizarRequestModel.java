@@ -1,9 +1,7 @@
-package com.fesc.apigestiondocumental.models.respuestas;
+package com.fesc.apigestiondocumental.models.peticiones;
 
-public class UsuarioDataRestModel {
+public class UsuarioActualizarRequestModel {
     
-    private long id;
-    private String idUsuario;
     private String documento;
     private String username;
     private String nombre;
@@ -11,22 +9,12 @@ public class UsuarioDataRestModel {
     private String correo;
     private String telefono;
     private String cargo;
+    private String password;
     private String passwordApp;
     
-    public UsuarioDataRestModel() {
+    public UsuarioActualizarRequestModel() {
     }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+
     public String getDocumento() {
         return documento;
     }
@@ -69,6 +57,12 @@ public class UsuarioDataRestModel {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getPasswordApp() {
         return passwordApp;
     }
@@ -76,5 +70,5 @@ public class UsuarioDataRestModel {
         this.passwordApp = passwordApp;
     }
 
-
+    
 }

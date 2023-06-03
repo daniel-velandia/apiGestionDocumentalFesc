@@ -39,6 +39,9 @@ public class UsuarioEntity implements Serializable{
     
     @Column(nullable = false)
     private String cargo;
+
+    @Column(nullable = true)
+    private String passwordApp;
     
     @Column(nullable = false)
     private String passwordEncriptada;
@@ -117,6 +120,14 @@ public class UsuarioEntity implements Serializable{
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getPasswordApp() {
+        return passwordApp;
+    }
+
+    public void setPasswordApp(String passwordApp) {
+        this.passwordApp = passwordApp;
     }
 
     public String getPasswordEncriptada() {

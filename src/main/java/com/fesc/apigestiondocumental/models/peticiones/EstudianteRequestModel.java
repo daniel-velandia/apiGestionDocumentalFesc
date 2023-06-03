@@ -1,11 +1,11 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class EstudianteCrearRequestModel extends PersonaRequestModel{
+public class EstudianteRequestModel extends PersonaRequestModel{
     
     private String carrera;
     private String semestre;
 
-    public EstudianteCrearRequestModel() {
+    public EstudianteRequestModel() {
     }
     
     public String getCarrera() {

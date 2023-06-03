@@ -1,14 +1,16 @@
 package com.fesc.apigestiondocumental.data.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -35,7 +37,7 @@ public class InfoArchivoEntity implements Serializable {
     private String peso;
     
     @CreatedDate
-    private Date fecha;
+    private LocalDate creado;
     
     @Column(nullable = false)
     private String numRadicado;
@@ -67,13 +69,17 @@ public class InfoArchivoEntity implements Serializable {
     @JoinColumn(name = "id_encargado")
     private EncargadoEntity encargadoEntity;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_respuesta")
     private InfoArchivoEntity respuestaEntity;
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuarioEntity;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_archivo")
+    private ArchivoEntity archivoEntity;
 
     public static long getSerialversionuid() {
         return SerialVersionUID;
@@ -111,12 +117,12 @@ public class InfoArchivoEntity implements Serializable {
         this.peso = peso;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public LocalDate getCreado() {
+        return creado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setCreado(LocalDate creado) {
+        this.creado = creado;
     }
 
     public String getNumRadicado() {
@@ -205,6 +211,14 @@ public class InfoArchivoEntity implements Serializable {
 
     public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
         this.usuarioEntity = usuarioEntity;
+    }
+
+    public ArchivoEntity getArchivoEntity() {
+        return archivoEntity;
+    }
+
+    public void setArchivoEntity(ArchivoEntity archivoEntity) {
+        this.archivoEntity = archivoEntity;
     }
 
     

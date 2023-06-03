@@ -16,6 +16,7 @@ public class UsuarioDto implements Serializable{
     private String telefono;
     private String cargo;
     private String password;
+    private String passwordApp;
     private String passwordEncriptada;
 
     public UsuarioDto() {
@@ -103,6 +104,14 @@ public class UsuarioDto implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordApp() {
+        return passwordApp;
+    }
+
+    public void setPasswordApp(String passwordApp) {
+        this.passwordApp = passwordApp;
     }
 
     public String getPasswordEncriptada() {

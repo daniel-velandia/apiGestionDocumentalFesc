@@ -1,13 +1,21 @@
 package com.fesc.apigestiondocumental.data.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "empresa")
+@EntityListeners(AuditingEntityListener.class)
 public class EmpresaEntity implements Serializable{
     
     private static final long SerialVersionUID = 1L;
@@ -33,6 +41,13 @@ public class EmpresaEntity implements Serializable{
 
     @Column(nullable = false)
     private String nombreAsistente;
+
+    @CreatedDate
+    private LocalDate creado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private UsuarioEntity usuarioEntity;
 
     public static long getSerialversionuid() {
         return SerialVersionUID;
@@ -93,4 +108,22 @@ public class EmpresaEntity implements Serializable{
     public void setNombreAsistente(String nombreAsistente) {
         this.nombreAsistente = nombreAsistente;
     }
+
+    public LocalDate getCreado() {
+        return creado;
+    }
+
+    public void setCreado(LocalDate creado) {
+        this.creado = creado;
+    }
+
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
+    }
+
+    
 }

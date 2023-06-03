@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class EmpresaCrearRequestModel {
+public class EmpresaRequestModel {
 
     private String nomEmpresa;
     private String nit;
@@ -8,7 +8,7 @@ public class EmpresaCrearRequestModel {
     private String telefono;
     private String nombreAsistente;
     
-    public EmpresaCrearRequestModel() {
+    public EmpresaRequestModel() {
     }
 
     public String getNomEmpresa() {

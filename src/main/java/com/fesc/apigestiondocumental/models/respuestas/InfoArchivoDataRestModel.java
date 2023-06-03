@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.respuestas;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class InfoArchivoDataRestModel {
     
@@ -8,7 +8,7 @@ public class InfoArchivoDataRestModel {
     private String idInfoArchivo;
     private String nombre;
     private String peso;
-    private Date fecha;
+    private LocalDate creado;
     private String numRadicado;
     private boolean tipoRadicado;
     private String tipoDocumento;
@@ -20,6 +20,7 @@ public class InfoArchivoDataRestModel {
     private EncargadoDataRestModel encargadoEntity;
     private InfoArchivoDataRestModel respuestaEntity;
     private UsuarioDataRestModel usuarioEntity;
+    private ArchivoDataRestModel archivoEntity;
 
     public InfoArchivoDataRestModel() {
     }
@@ -56,12 +57,12 @@ public class InfoArchivoDataRestModel {
         this.peso = peso;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public LocalDate getCreado() {
+        return creado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setCreado(LocalDate creado) {
+        this.creado = creado;
     }
 
     public String getNumRadicado() {
@@ -150,6 +151,14 @@ public class InfoArchivoDataRestModel {
 
     public void setUsuarioEntity(UsuarioDataRestModel usuarioEntity) {
         this.usuarioEntity = usuarioEntity;
+    }
+
+    public ArchivoDataRestModel getArchivoEntity() {
+        return archivoEntity;
+    }
+
+    public void setArchivoEntity(ArchivoDataRestModel archivoEntity) {
+        this.archivoEntity = archivoEntity;
     }
 
     

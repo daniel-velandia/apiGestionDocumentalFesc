@@ -1,11 +1,11 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class EncargadoCrearRequestModel extends PersonaRequestModel{
+public class EncargadoRequestModel extends PersonaRequestModel{
     
     private String cargo;
     private String area;
     
-    public EncargadoCrearRequestModel() {
+    public EncargadoRequestModel() {
     }
 
     public String getCargo() {

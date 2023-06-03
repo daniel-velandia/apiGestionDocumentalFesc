@@ -2,13 +2,21 @@ package com.fesc.apigestiondocumental.data.repositorios;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fesc.apigestiondocumental.data.entidades.InfoArchivoEntity;
 
-public interface IInfoArchivoRepository extends CrudRepository<InfoArchivoEntity, Long>{
+public interface IInfoArchivoRepository extends JpaRepository<InfoArchivoEntity, Long>{
     
-    public List<InfoArchivoEntity> getByEstudianteEntityIdOrderByFechaDesc(long estudianteEntityId);
+    public List<InfoArchivoEntity> getByEstudianteEntityDocumentoOrderByCreadoDesc(String documento);
+    public List<InfoArchivoEntity> getByEstudianteEntityNombreAndEstudianteEntityApellidoOrderByCreadoDesc(String nombre, String apellido);
     
-    public List<InfoArchivoEntity> getByEmpresaEntityIdOrderByFechaDesc(long empresaEntityId);
+    public List<InfoArchivoEntity> getByEmpresaEntityNitOrderByCreadoDesc(String nit);
+    public List<InfoArchivoEntity> getByEmpresaEntityNomEmpresaOrderByCreadoDesc(String nomEmpresa);
+
+    public List<InfoArchivoEntity> getByUsuarioEntityUsernameOrderByCreadoDesc(String username);
+
+    public InfoArchivoEntity findByIdInfoArchivo(String idInfoArchivo);
+
+    public List<InfoArchivoEntity> findByNumRadicado(String numRadicado);
 }

@@ -1,33 +1,35 @@
 package com.fesc.apigestiondocumental.shared;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class InfoArchivoDto implements Serializable{
-    
+
     private static final long SerialVersionUID = 1L;
 
     private long id;
     private String idInfoArchivo;
     private String nombre;
     private String peso;
-    private Date fecha;
+    private LocalDate creado; 
     private String numRadicado;
     private boolean tipoRadicado;
     private String tipoDocumento;
     private String asunto;
     private String anexos;
     private boolean reqRespuesta;
+    private boolean informarEncargado;
     private String estudiante;
     private String empresa;
     private String encargado;
     private String respuesta;
-    private String username;
+    private String username; 
     private EstudianteDto estudianteEntity;
     private EmpresaDto empresaEntity;
     private EncargadoDto encargadoEntity;
     private InfoArchivoDto respuestaEntity;
     private UsuarioDto usuarioEntity;
+    private ArchivoDto archivoEntity;
     
     public InfoArchivoDto() {
     }
@@ -68,12 +70,12 @@ public class InfoArchivoDto implements Serializable{
         this.peso = peso;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public LocalDate getCreado() {
+        return creado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setCreado(LocalDate creado) {
+        this.creado = creado;
     }
 
     public String getNumRadicado() {
@@ -122,6 +124,14 @@ public class InfoArchivoDto implements Serializable{
 
     public void setReqRespuesta(boolean reqRespuesta) {
         this.reqRespuesta = reqRespuesta;
+    }
+
+    public boolean isInformarEncargado() {
+        return informarEncargado;
+    }
+
+    public void setInformarEncargado(boolean informarEncargado) {
+        this.informarEncargado = informarEncargado;
     }
 
     public String getEstudiante() {
@@ -202,6 +212,14 @@ public class InfoArchivoDto implements Serializable{
 
     public void setUsuarioEntity(UsuarioDto usuarioEntity) {
         this.usuarioEntity = usuarioEntity;
+    }
+
+    public ArchivoDto getArchivoEntity() {
+        return archivoEntity;
+    }
+
+    public void setArchivoEntity(ArchivoDto archivoEntity) {
+        this.archivoEntity = archivoEntity;
     }
 
     
