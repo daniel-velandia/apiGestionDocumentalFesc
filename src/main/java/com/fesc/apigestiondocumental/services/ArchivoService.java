@@ -25,7 +25,6 @@ import com.fesc.apigestiondocumental.data.repositorios.IUsuarioRepository;
 import com.fesc.apigestiondocumental.shared.ArchivoDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
-import com.fesc.apigestiondocumental.utils.MapperArchivo;
 import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
@@ -56,9 +55,6 @@ public class ArchivoService implements IArchivoService{
     ModelMapper modelMapper;
 
     @Autowired
-    MapperArchivo mapperArchivo;
-
-    @Autowired
     Validaciones validaciones;
 
     @Override
@@ -73,10 +69,7 @@ public class ArchivoService implements IArchivoService{
         EstudianteEntity estudianteEntity = iEstudianteRepository.findByIdEstudiante(infoArchivoDto.getEstudiante());
         EncargadoEntity encargadoEntity = iEncargadoRepository.findByIdEncargado(infoArchivoDto.getEncargado());
         EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(infoArchivoDto.getEmpresa());
-        InfoArchivoEntity infoArchivoEntityRespuesta = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getRespuesta());
-
-        enviarMensaje(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
-                        usuarioEntity.getCorreo(), usuarioEntity.getPasswordApp(), infoArchivoDto.isInformarEncargado());
+        InfoArchivoEntity infoArchivoEntityEntrega = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getEntrega());
 
         archivoEntity.setIdArchivo(UUID.randomUUID().toString());
         ArchivoEntity archivoEntityCreado = iArchivoRepository.save(archivoEntity);
@@ -93,15 +86,15 @@ public class ArchivoService implements IArchivoService{
             throw new ErrorException("Se debe agregar un remitente para el archivo (estudiante o empresa)");
         }
 
-        // validar y asignar la respuesta
+        // validar y asignar la entrega
         if (!infoArchivoEntity.isTipoRadicado()) {
 
-            if(infoArchivoEntityRespuesta != null && infoArchivoEntityRespuesta.isReqRespuesta()) {
+            if(infoArchivoEntityEntrega != null && infoArchivoEntityEntrega.isReqRespuesta()) {
 
-                infoArchivoEntity.setRespuestaEntity(infoArchivoEntityRespuesta);
+                infoArchivoEntity.setEntregaEntity(infoArchivoEntityEntrega);
             } else {
 
-                throw new ErrorException("verifique si agrego el archivo a responder o si este ultimo requiere respuesta");
+                throw new ErrorException("verifique si agrego el archivo a responder o si este requiere respuesta");
             }
         }
 
@@ -112,6 +105,9 @@ public class ArchivoService implements IArchivoService{
         infoArchivoEntity.setArchivoEntity(archivoEntityCreado);
 
         iInfoArchivoRepository.save(infoArchivoEntity);
+
+        enviarMensaje(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
+                        usuarioEntity.getCorreo(), usuarioEntity.getPasswordApp(), infoArchivoDto.isInformarEncargado());
 
         return new RespuestaDto(new Date(), true);
 
@@ -126,7 +122,7 @@ public class ArchivoService implements IArchivoService{
             throw new ErrorException("error al realizar la accion");
         }
 
-        InfoArchivoDto infoArchivoDto = mapperArchivo.mapDto(infoArchivoEntity);
+        InfoArchivoDto infoArchivoDto = modelMapper.map(infoArchivoEntity, InfoArchivoDto.class);
 
         return infoArchivoDto;
     }
@@ -162,7 +158,7 @@ public class ArchivoService implements IArchivoService{
         EstudianteEntity estudianteEntity = iEstudianteRepository.findByIdEstudiante(infoArchivoDto.getEstudiante());
         EncargadoEntity encargadoEntity = iEncargadoRepository.findByIdEncargado(infoArchivoDto.getEncargado());
         EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(infoArchivoDto.getEmpresa());
-        InfoArchivoEntity infoArchivoEntityRespuesta = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getRespuesta());
+        InfoArchivoEntity infoArchivoEntityEntrega = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getEntrega());
 
         archivoEntity.setId(infoArchivoEntityEncontrado.getArchivoEntity().getId());
         archivoEntity.setIdArchivo(infoArchivoEntityEncontrado.getArchivoEntity().getIdArchivo());
@@ -176,7 +172,7 @@ public class ArchivoService implements IArchivoService{
         infoArchivoEntity.setEmpresaEntity(empresaEntity);
         infoArchivoEntity.setEncargadoEntity(encargadoEntity);
         infoArchivoEntity.setArchivoEntity(archivoEntity);
-        infoArchivoEntity.setRespuestaEntity(infoArchivoEntityRespuesta);
+        infoArchivoEntity.setEntregaEntity(infoArchivoEntityEntrega);
 
         iInfoArchivoRepository.save(infoArchivoEntity);
 

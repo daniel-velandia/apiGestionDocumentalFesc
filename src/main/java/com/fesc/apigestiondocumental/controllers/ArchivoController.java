@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fesc.apigestiondocumental.models.peticiones.ArchivoActualizarRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.ArchivoRequestModel;
 import com.fesc.apigestiondocumental.models.respuestas.ArchivoDataRestModel;
 import com.fesc.apigestiondocumental.models.respuestas.InfoArchivoDataRestModel;
@@ -83,16 +84,13 @@ public class ArchivoController {
     }
 
     @PutMapping(path = "/{id}")
-    public RespuestaDataRestModel actualizarArchivo(@PathVariable String id, @RequestBody ArchivoRequestModel archivoRequestModel) {
+    public RespuestaDataRestModel actualizarArchivo(@PathVariable String id, @RequestBody ArchivoActualizarRequestModel archivoActualizarRequestModel) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        ArchivoDto archivoDto = modelMapper.map(archivoRequestModel, ArchivoDto.class);
-        InfoArchivoDto infoArchivoDto = modelMapper.map(archivoRequestModel, InfoArchivoDto.class);
-
-        infoArchivoDto.setArchivoEntity(archivoDto);
+        InfoArchivoDto infoArchivoDto = modelMapper.map(archivoActualizarRequestModel, InfoArchivoDto.class);
         infoArchivoDto.setUsername(username);
 
         RespuestaDto respuestaDto =  iArchivoService.actualizarArchivo(id, infoArchivoDto);

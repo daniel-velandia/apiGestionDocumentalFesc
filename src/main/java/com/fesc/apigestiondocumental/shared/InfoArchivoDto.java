@@ -22,12 +22,12 @@ public class InfoArchivoDto implements Serializable{
     private String estudiante;
     private String empresa;
     private String encargado;
-    private String respuesta;
+    private String entrega;
     private String username; 
     private EstudianteDto estudianteEntity;
     private EmpresaDto empresaEntity;
     private EncargadoDto encargadoEntity;
-    private InfoArchivoDto respuestaEntity;
+    private InfoArchivoDto entregaEntity;
     private UsuarioDto usuarioEntity;
     private ArchivoDto archivoEntity;
     
@@ -158,12 +158,12 @@ public class InfoArchivoDto implements Serializable{
         this.encargado = encargado;
     }
 
-    public String getRespuesta() {
-        return respuesta;
+    public String getEntrega() {
+        return entrega;
     }
 
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
+    public void setEntrega(String entrega) {
+        this.entrega = entrega;
     }
 
     public String getUsername() {
@@ -198,12 +198,12 @@ public class InfoArchivoDto implements Serializable{
         this.encargadoEntity = encargadoEntity;
     }
 
-    public InfoArchivoDto getRespuestaEntity() {
-        return respuestaEntity;
+    public InfoArchivoDto getEntregaEntity() {
+        return entregaEntity;
     }
 
-    public void setRespuestaEntity(InfoArchivoDto respuestaEntity) {
-        this.respuestaEntity = respuestaEntity;
+    public void setEntregaEntity(InfoArchivoDto entregaEntity) {
+        this.entregaEntity = entregaEntity;
     }
 
     public UsuarioDto getUsuarioEntity() {

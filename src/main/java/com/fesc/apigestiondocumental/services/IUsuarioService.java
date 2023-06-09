@@ -21,7 +21,7 @@ public interface IUsuarioService extends UserDetailsService {
 
     public void eliminarUsuario(String username);
     
-    public List<InfoArchivoDto> listarArchivos(String username);
+    public List<InfoArchivoDto> listarArchivos(String username, String tipo);
 
     public List<EstudianteDto> listarEstudiantes(String username);
 

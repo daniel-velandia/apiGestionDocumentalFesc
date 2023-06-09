@@ -86,8 +86,10 @@ public class EncargadoService implements IEncargadoService{
 
         encargadoDto.setId(encargadoEntityEncontrado.getId());
         encargadoDto.setIdEncargado(encargadoEntityEncontrado.getIdEncargado());
+        encargadoDto.setCreado(encargadoEntityEncontrado.getCreado());
 
         EncargadoEntity encargadoEntity = modelMapper.map(encargadoDto, EncargadoEntity.class);
+        encargadoEntity.setUsuarioEntity(encargadoEntityEncontrado.getUsuarioEntity());
 
         iEncargadoRepository.save(encargadoEntity);
 

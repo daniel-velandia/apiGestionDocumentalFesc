@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -24,7 +25,7 @@ public class InfoArchivoEntity implements Serializable {
     private static final long SerialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -70,15 +71,15 @@ public class InfoArchivoEntity implements Serializable {
     private EncargadoEntity encargadoEntity;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_respuesta")
-    private InfoArchivoEntity respuestaEntity;
+    @JoinColumn(name = "id_entrega")
+    private InfoArchivoEntity entregaEntity;
     
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuarioEntity;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_archivo")
+    @JoinColumn(name = "id_archivo", referencedColumnName = "id")
     private ArchivoEntity archivoEntity;
 
     public static long getSerialversionuid() {
@@ -197,12 +198,12 @@ public class InfoArchivoEntity implements Serializable {
         this.encargadoEntity = encargadoEntity;
     }
 
-    public InfoArchivoEntity getRespuestaEntity() {
-        return respuestaEntity;
+    public InfoArchivoEntity getEntregaEntity() {
+        return entregaEntity;
     }
 
-    public void setRespuestaEntity(InfoArchivoEntity respuestaEntity) {
-        this.respuestaEntity = respuestaEntity;
+    public void setEntregaEntity(InfoArchivoEntity entregaEntity) {
+        this.entregaEntity = entregaEntity;
     }
 
     public UsuarioEntity getUsuarioEntity() {

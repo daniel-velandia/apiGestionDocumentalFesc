@@ -17,7 +17,7 @@ public class Validaciones {
                 infoArchivoDto.getTipoDocumento() == null || infoArchivoDto.getAsunto() == null ||
                 infoArchivoDto.getAnexos() == null || infoArchivoDto.getEstudiante() == null ||
                 infoArchivoDto.getEmpresa() == null || infoArchivoDto.getEncargado() == null ||
-                infoArchivoDto.getRespuesta() == null || infoArchivoDto.getArchivoEntity().getDatos() == null) {
+                infoArchivoDto.getEntrega() == null || infoArchivoDto.getArchivoEntity().getDatos() == null) {
 
             throw new ErrorException("campos sin diligenciar");
         }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fesc.apigestiondocumental.models.peticiones.UsuarioActualizarRequestModel;
@@ -99,13 +100,13 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/misArchivos")
-    public List<InfoArchivoDataRestModel> listarArchivos() {
+    public List<InfoArchivoDataRestModel> listarArchivos(@RequestParam(name = "tipo", required = false) String tipo) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        List<InfoArchivoDto> infoArchivoDtoList = iUsuarioService.listarArchivos(username);
+        List<InfoArchivoDto> infoArchivoDtoList = iUsuarioService.listarArchivos(username, tipo);
 
         List<InfoArchivoDataRestModel> infoArchivoDataRestModelList = new ArrayList<InfoArchivoDataRestModel>();
 

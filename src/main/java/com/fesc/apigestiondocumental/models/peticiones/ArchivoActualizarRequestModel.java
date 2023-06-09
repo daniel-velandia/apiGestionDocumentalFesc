@@ -1,6 +1,6 @@
 package com.fesc.apigestiondocumental.models.peticiones;
 
-public class ArchivoRequestModel {
+public class ArchivoActualizarRequestModel {
     
     private String nombre;
     private byte[] datos;
@@ -16,7 +16,7 @@ public class ArchivoRequestModel {
     private String entrega;
     private boolean informarEncargado;
 
-    public ArchivoRequestModel() {
+    public ArchivoActualizarRequestModel() {
     }
 
     public String getNombre() {

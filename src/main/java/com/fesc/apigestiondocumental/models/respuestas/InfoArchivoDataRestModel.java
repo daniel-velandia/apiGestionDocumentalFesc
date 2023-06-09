@@ -14,11 +14,12 @@ public class InfoArchivoDataRestModel {
     private String tipoDocumento;
     private String asunto;
     private String anexos;
-    private boolean respuesta;
+    private boolean reqRespuesta;
+    private String entrega;
     private EstudianteDataRestModel estudianteEntity;
     private EmpresaDataRestModel empresaEntity;
     private EncargadoDataRestModel encargadoEntity;
-    private InfoArchivoDataRestModel respuestaEntity;
+    private InfoArchivoDataRestModel entregaEntity;
     private UsuarioDataRestModel usuarioEntity;
     private ArchivoDataRestModel archivoEntity;
 
@@ -105,12 +106,20 @@ public class InfoArchivoDataRestModel {
         this.anexos = anexos;
     }
 
-    public boolean isRespuesta() {
-        return respuesta;
+    public boolean isReqRespuesta() {
+        return reqRespuesta;
     }
 
-    public void setRespuesta(boolean respuesta) {
-        this.respuesta = respuesta;
+    public void setReqRespuesta(boolean reqRespuesta) {
+        this.reqRespuesta = reqRespuesta;
+    }
+
+    public String getEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(String entrega) {
+        this.entrega = entrega;
     }
 
     public EstudianteDataRestModel getEstudianteEntity() {
@@ -137,12 +146,12 @@ public class InfoArchivoDataRestModel {
         this.encargadoEntity = encargadoEntity;
     }
 
-    public InfoArchivoDataRestModel getRespuestaEntity() {
-        return respuestaEntity;
+    public InfoArchivoDataRestModel getEntregaEntity() {
+        return entregaEntity;
     }
 
-    public void setRespuestaEntity(InfoArchivoDataRestModel respuestaEntity) {
-        this.respuestaEntity = respuestaEntity;
+    public void setEntregaEntity(InfoArchivoDataRestModel entregaEntity) {
+        this.entregaEntity = entregaEntity;
     }
 
     public UsuarioDataRestModel getUsuarioEntity() {

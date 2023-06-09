@@ -20,7 +20,6 @@ import com.fesc.apigestiondocumental.shared.EmpresaDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
 import com.fesc.apigestiondocumental.utils.FiltroArchivo;
-import com.fesc.apigestiondocumental.utils.MapperArchivo;
 import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
@@ -37,9 +36,6 @@ public class EmpresaService implements IEmpresaService{
 
     @Autowired
     IUsuarioRepository iUsuarioRepository;
-
-    @Autowired
-    MapperArchivo mapperArchivo;
 
     @Autowired
     Validaciones validaciones;
@@ -110,7 +106,7 @@ public class EmpresaService implements IEmpresaService{
 
         for (InfoArchivoEntity infoArchivoEntity : infoArchivoEntityList) {
             
-            InfoArchivoDto infoArchivoDto = mapperArchivo.mapDto(infoArchivoEntity);
+            InfoArchivoDto infoArchivoDto = modelMapper.map(infoArchivoEntity, InfoArchivoDto.class);
 
             infoArchivoDtoList.add(infoArchivoDto);
         }
@@ -137,6 +133,7 @@ public class EmpresaService implements IEmpresaService{
 
         empresaDto.setId(empresaEntityEncontrada.getId());
         empresaDto.setIdEmpresa(empresaEntityEncontrada.getIdEmpresa());
+        empresaDto.setCreado(empresaEntityEncontrada.getCreado());
 
         EmpresaEntity empresaEntity = modelMapper.map(empresaDto, EmpresaEntity.class);
         empresaEntity.setUsuarioEntity(empresaEntityEncontrada.getUsuarioEntity());

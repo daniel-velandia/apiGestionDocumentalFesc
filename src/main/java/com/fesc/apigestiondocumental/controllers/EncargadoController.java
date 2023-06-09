@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fesc.apigestiondocumental.models.peticiones.EncargadoActualizarRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.EncargadoRequestModel;
 import com.fesc.apigestiondocumental.models.respuestas.EncargadoDataRestModel;
 import com.fesc.apigestiondocumental.models.respuestas.RespuestaDataRestModel;
@@ -64,13 +65,13 @@ public class EncargadoController {
     }
 
     @PutMapping(path = "/{id}")
-    public RespuestaDataRestModel actualizarEncargado(@PathVariable String id, @RequestBody EncargadoRequestModel encargadoRequestModel ) {
+    public RespuestaDataRestModel actualizarEncargado(@PathVariable String id, @RequestBody EncargadoActualizarRequestModel encargadoActualizarRequestModel ) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        EncargadoDto encargadoDto = modelMapper.map(encargadoRequestModel, EncargadoDto.class);
+        EncargadoDto encargadoDto = modelMapper.map(encargadoActualizarRequestModel, EncargadoDto.class);
         encargadoDto.setUsername(username);
 
         RespuestaDto respuestaDto = iEncargadoService.actualizarEncargado(id, encargadoDto);

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fesc.apigestiondocumental.models.peticiones.EmpresaActualizarRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.EmpresaRequestModel;
 import com.fesc.apigestiondocumental.models.respuestas.EmpresaDataRestModel;
 import com.fesc.apigestiondocumental.models.respuestas.InfoArchivoDataRestModel;
@@ -90,13 +91,13 @@ public class EmpresaController {
     }
 
     @PutMapping(path = "/{id}")
-    public RespuestaDataRestModel actualizarEmpresa(@PathVariable String id, @RequestBody EmpresaRequestModel empresaRequestModel) {
+    public RespuestaDataRestModel actualizarEmpresa(@PathVariable String id, @RequestBody EmpresaActualizarRequestModel empresaActualizarRequestModel) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        EmpresaDto empresaDto = modelMapper.map(empresaRequestModel, EmpresaDto.class);
+        EmpresaDto empresaDto = modelMapper.map(empresaActualizarRequestModel, EmpresaDto.class);
         empresaDto.setUsername(username);
 
         RespuestaDto respuestaDto = iEmpresaService.actualizarEmpresa(id, empresaDto);

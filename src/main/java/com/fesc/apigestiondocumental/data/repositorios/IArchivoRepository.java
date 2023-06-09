@@ -1,10 +1,10 @@
 package com.fesc.apigestiondocumental.data.repositorios;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.fesc.apigestiondocumental.data.entidades.ArchivoEntity;
 
-public interface IArchivoRepository extends JpaRepository<ArchivoEntity, Long>{
+public interface IArchivoRepository extends CrudRepository<ArchivoEntity, Long>{
     
     public ArchivoEntity findByIdArchivo(String idArchivo);
 

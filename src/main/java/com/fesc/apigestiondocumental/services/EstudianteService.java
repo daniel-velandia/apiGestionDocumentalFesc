@@ -20,7 +20,6 @@ import com.fesc.apigestiondocumental.shared.EstudianteDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
 import com.fesc.apigestiondocumental.utils.FiltroArchivo;
-import com.fesc.apigestiondocumental.utils.MapperArchivo;
 import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
@@ -37,9 +36,6 @@ public class EstudianteService implements IEstudianteService{
 
     @Autowired
     IUsuarioRepository iUsuarioRepository;
-
-    @Autowired
-    MapperArchivo mapperArchivo;
 
     @Autowired
     Validaciones validaciones;
@@ -112,7 +108,7 @@ public class EstudianteService implements IEstudianteService{
 
         for (InfoArchivoEntity infoArchivoEntity : infoArchivoEntityList) {
             
-            InfoArchivoDto infoArchivoDto = mapperArchivo.mapDto(infoArchivoEntity);
+            InfoArchivoDto infoArchivoDto = modelMapper.map(infoArchivoEntity, InfoArchivoDto.class);
 
             infoArchivoDtoList.add(infoArchivoDto);
             
@@ -145,8 +141,11 @@ public class EstudianteService implements IEstudianteService{
             estudianteDto.setId(estudianteEntityEncontrado.getId());
             estudianteDto.setIdEstudiante(estudianteEntityEncontrado.getIdEstudiante());
         }
+        
+        estudianteDto.setCreado(estudianteEntityEncontrado.getCreado());
 
         EstudianteEntity estudianteEntity = modelMapper.map(estudianteDto, EstudianteEntity.class);
+        estudianteEntity.setUsuarioEntity(estudianteEntityEncontrado.getUsuarioEntity());
 
         iEstudianteRepository.save(estudianteEntity);
 

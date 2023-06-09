@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fesc.apigestiondocumental.models.peticiones.EstudianteActualizarRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.EstudianteRequestModel;
 import com.fesc.apigestiondocumental.models.respuestas.EstudianteDataRestModel;
 import com.fesc.apigestiondocumental.models.respuestas.InfoArchivoDataRestModel;
@@ -90,13 +91,13 @@ public class EstudianteController {
     }
 
     @PutMapping(path = "/{id}")
-    public RespuestaDataRestModel actualizarEstudiante(@PathVariable String id, @RequestBody EstudianteRequestModel estudianteRequestModel) {
+    public RespuestaDataRestModel actualizarEstudiante(@PathVariable String id, @RequestBody EstudianteActualizarRequestModel estudianteActualizarRequestModel) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        EstudianteDto estudianteDto = modelMapper.map(estudianteRequestModel, EstudianteDto.class);
+        EstudianteDto estudianteDto = modelMapper.map(estudianteActualizarRequestModel, EstudianteDto.class);
         estudianteDto.setUsername(username);
 
         RespuestaDto respuestaDto = iEstudianteService.actualizarEstudiante(id, estudianteDto);
