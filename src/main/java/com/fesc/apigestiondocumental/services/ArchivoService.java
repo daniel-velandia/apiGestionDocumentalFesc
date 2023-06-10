@@ -71,6 +71,9 @@ public class ArchivoService implements IArchivoService{
         EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(infoArchivoDto.getEmpresa());
         InfoArchivoEntity infoArchivoEntityEntrega = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getEntrega());
 
+        enviarMensaje(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
+                    usuarioEntity.getCorreo(), usuarioEntity.getPasswordApp(), infoArchivoDto.isInformarEncargado());
+
         archivoEntity.setIdArchivo(UUID.randomUUID().toString());
         ArchivoEntity archivoEntityCreado = iArchivoRepository.save(archivoEntity);
 
@@ -105,9 +108,6 @@ public class ArchivoService implements IArchivoService{
         infoArchivoEntity.setArchivoEntity(archivoEntityCreado);
 
         iInfoArchivoRepository.save(infoArchivoEntity);
-
-        enviarMensaje(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
-                        usuarioEntity.getCorreo(), usuarioEntity.getPasswordApp(), infoArchivoDto.isInformarEncargado());
 
         return new RespuestaDto(new Date(), true);
 
