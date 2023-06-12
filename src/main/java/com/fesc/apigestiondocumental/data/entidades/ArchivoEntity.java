@@ -22,7 +22,7 @@ public class ArchivoEntity implements Serializable {
     private String idArchivo;
 
     @Lob
-    @Column(name = "datos", columnDefinition = "LONGBLOB", nullable = false)
+    @Column(name = "datos", columnDefinition = "MEDIUMBLOB", nullable = false)
     private byte[] datos;
 
     public static long getSerialversionuid() {
