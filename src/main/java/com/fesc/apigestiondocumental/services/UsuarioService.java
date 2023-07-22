@@ -30,7 +30,6 @@ import com.fesc.apigestiondocumental.shared.EstudianteDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
 import com.fesc.apigestiondocumental.shared.UsuarioDto;
-import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
 public class UsuarioService implements IUsuarioService{
@@ -56,13 +55,8 @@ public class UsuarioService implements IUsuarioService{
     @Autowired
     IEmpresaRepository iEmpresaRepository;
 
-    @Autowired
-    Validaciones validaciones;
-
     @Override
     public RespuestaDto crearUsuario(UsuarioDto usuarioDto) {
-
-        validaciones.validarCamposUsuario(usuarioDto);
 
         if(iUsuarioRepository.findByUsername(usuarioDto.getUsername()) != null) {
             throw new ErrorException("username ya existe");
@@ -70,10 +64,6 @@ public class UsuarioService implements IUsuarioService{
 
         if(iUsuarioRepository.findByCorreo(usuarioDto.getCorreo()) != null) {
             throw new ErrorException("correo ya existe");
-        }
-
-        if(iUsuarioRepository.findByDocumento(usuarioDto.getDocumento()) != null) {
-            throw new ErrorException("documento ya existe");
         }
         
         UsuarioEntity usuarioEntity = modelMapper.map(usuarioDto, UsuarioEntity.class);
@@ -98,17 +88,27 @@ public class UsuarioService implements IUsuarioService{
     @Override
     public RespuestaDto actualizarUsuario(String username, UsuarioDto usuarioDto) {
 
-        validaciones.validarCamposUsuario(usuarioDto);
-
         UsuarioEntity usuarioEntityAutenticado = iUsuarioRepository.findByUsername(username);
 
         usuarioDto.setId(usuarioEntityAutenticado.getId());
         usuarioDto.setIdUsuario(usuarioEntityAutenticado.getIdUsuario());
-        usuarioDto.setPasswordEncriptada(bCryptPasswordEncoder.encode(usuarioDto.getPassword()));
+        usuarioDto.setPasswordEncriptada(usuarioEntityAutenticado.getPasswordEncriptada());
 
         UsuarioEntity usuarioEntity = modelMapper.map(usuarioDto, UsuarioEntity.class);
 
         iUsuarioRepository.save(usuarioEntity);
+
+        return new RespuestaDto(new Date(), true);
+    }
+
+    @Override
+    public RespuestaDto actualizarPassword(String username, UsuarioDto usuarioDto) {
+
+        UsuarioEntity usuarioEntityAutenticado = iUsuarioRepository.findByUsername(username);
+
+        usuarioEntityAutenticado.setPasswordEncriptada(bCryptPasswordEncoder.encode(usuarioDto.getPassword()));
+
+        iUsuarioRepository.save(usuarioEntityAutenticado);
 
         return new RespuestaDto(new Date(), true);
     }
@@ -127,7 +127,7 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public List<InfoArchivoDto> listarArchivos(String username, String tipo) {
+    public List<InfoArchivoDto> listarArchivos(String username, String reqRespuesta) {
         
         List<InfoArchivoEntity> infoArchivoEntityList = iInfoArchivoRepository.getByUsuarioEntityUsernameOrderByCreadoDesc(username);
 
@@ -140,11 +140,10 @@ public class UsuarioService implements IUsuarioService{
             infoArchivoDtoList.add(infoArchivoDto);
         }
 
-        if(tipo != null) {
+        if(reqRespuesta != null) {
 
             infoArchivoDtoList.removeIf(infoArchivoDto ->
-                tipo.equals("entrega") ? !infoArchivoDto.isTipoRadicado() :
-                        (tipo.equals("respuesta") ? infoArchivoDto.isTipoRadicado() : true));
+                reqRespuesta.equals("true") ? !infoArchivoDto.isReqRespuesta() : false);
         }
 
         return infoArchivoDtoList;

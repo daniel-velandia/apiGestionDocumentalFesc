@@ -19,9 +19,6 @@ public class UsuarioEntity implements Serializable{
 
     @Column(nullable = false)
     private String idUsuario;
-    
-    @Column(nullable = false)
-    private String documento;
 
     @Column(nullable = false)
     private String username;
@@ -34,12 +31,6 @@ public class UsuarioEntity implements Serializable{
     
     @Column(nullable = false)
     private String correo;
-    
-    @Column(nullable = false)
-    private String telefono;
-    
-    @Column(nullable = false)
-    private String cargo;
 
     @Column(nullable = true)
     private String passwordApp;
@@ -65,14 +56,6 @@ public class UsuarioEntity implements Serializable{
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 
     public String getUsername() {
@@ -105,22 +88,6 @@ public class UsuarioEntity implements Serializable{
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public String getPasswordApp() {

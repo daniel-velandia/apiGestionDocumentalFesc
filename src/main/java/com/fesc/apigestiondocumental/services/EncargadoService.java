@@ -14,7 +14,6 @@ import com.fesc.apigestiondocumental.data.repositorios.IEncargadoRepository;
 import com.fesc.apigestiondocumental.data.repositorios.IUsuarioRepository;
 import com.fesc.apigestiondocumental.shared.EncargadoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
-import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
 public class EncargadoService implements IEncargadoService{
@@ -28,13 +27,8 @@ public class EncargadoService implements IEncargadoService{
     @Autowired
     IUsuarioRepository iUsuarioRepository;
 
-    @Autowired
-    Validaciones validaciones;
-
     @Override
     public RespuestaDto crearEncargado(EncargadoDto encargadoDto) {
-
-        validaciones.validarCamposEncargado(encargadoDto);
 
         if(iEncargadoRepository.findByCorreo(encargadoDto.getCorreo()) != null) {
             throw new ErrorException("correo ya existe");
@@ -71,8 +65,6 @@ public class EncargadoService implements IEncargadoService{
 
     @Override
     public RespuestaDto actualizarEncargado(String id, EncargadoDto encargadoDto) {
-        
-        validaciones.validarCamposEncargado(encargadoDto);
         
         EncargadoEntity encargadoEntityEncontrado = iEncargadoRepository.findByIdEncargado(id);
 

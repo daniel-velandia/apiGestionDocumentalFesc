@@ -20,7 +20,6 @@ import com.fesc.apigestiondocumental.shared.EstudianteDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
 import com.fesc.apigestiondocumental.utils.FiltroArchivo;
-import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
 public class EstudianteService implements IEstudianteService{
@@ -38,15 +37,10 @@ public class EstudianteService implements IEstudianteService{
     IUsuarioRepository iUsuarioRepository;
 
     @Autowired
-    Validaciones validaciones;
-
-    @Autowired
     FiltroArchivo filtroArchivo;
 
     @Override
     public RespuestaDto crearEstudiante(EstudianteDto estudianteDto) {
-
-        validaciones.validarCamposEstudiante(estudianteDto);
 
         if(iEstudianteRepository.findByCorreo(estudianteDto.getCorreo()) != null) {
             throw new ErrorException("correo ya existe");
@@ -121,8 +115,6 @@ public class EstudianteService implements IEstudianteService{
 
     @Override
     public RespuestaDto actualizarEstudiante(String id, EstudianteDto estudianteDto) {
-
-        validaciones.validarCamposEstudiante(estudianteDto);
         
         EstudianteEntity estudianteEntityEncontrado = iEstudianteRepository.findByIdEstudiante(id);
 

@@ -20,7 +20,6 @@ import com.fesc.apigestiondocumental.shared.EmpresaDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
 import com.fesc.apigestiondocumental.utils.FiltroArchivo;
-import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @Service
 public class EmpresaService implements IEmpresaService{
@@ -38,15 +37,10 @@ public class EmpresaService implements IEmpresaService{
     IUsuarioRepository iUsuarioRepository;
 
     @Autowired
-    Validaciones validaciones;
-
-    @Autowired
     FiltroArchivo filtroArchivo;
 
     @Override
     public RespuestaDto crearEmpresa(EmpresaDto empresaDto) {
-
-        validaciones.validarCamposEmpresa(empresaDto);
 
         if(iEmpresaRepository.findByNomEmpresa(empresaDto.getNomEmpresa()) != null) {
             throw new ErrorException("empresa ya existe");
@@ -118,8 +112,6 @@ public class EmpresaService implements IEmpresaService{
 
     @Override
     public RespuestaDto actualizarEmpresa(String id, EmpresaDto empresaDto) {
-
-        validaciones.validarCamposEmpresa(empresaDto);
 
         EmpresaEntity empresaEntityEncontrada = iEmpresaRepository.findByIdEmpresa(id);
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fesc.apigestiondocumental.models.peticiones.UsuarioActualizarPasswordRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.UsuarioActualizarRequestModel;
 import com.fesc.apigestiondocumental.models.peticiones.UsuarioRequestModel;
 import com.fesc.apigestiondocumental.models.respuestas.EmpresaDataRestModel;
@@ -87,6 +88,22 @@ public class UsuarioController {
         return respuestaDataRestModel;
     }
 
+    @PutMapping(path = "/password")
+    public RespuestaDataRestModel actualizarPassword(@RequestBody UsuarioActualizarPasswordRequestModel usuarioActualizarPasswordRequestModel) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getPrincipal().toString();
+        
+        UsuarioDto usuarioDto = modelMapper.map(usuarioActualizarPasswordRequestModel, UsuarioDto.class);
+
+        RespuestaDto respuestaDto = iUsuarioService.actualizarPassword(username, usuarioDto);
+
+        RespuestaDataRestModel respuestaDataRestModel = modelMapper.map(respuestaDto, RespuestaDataRestModel.class);
+
+        return respuestaDataRestModel;
+    }
+
     @DeleteMapping
     public RespuestaDataRestModel eliminarUsuario() {
 
@@ -100,13 +117,13 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/misArchivos")
-    public List<InfoArchivoDataRestModel> listarArchivos(@RequestParam(name = "tipo", required = false) String tipo) {
+    public List<InfoArchivoDataRestModel> listarArchivos(@RequestParam(name = "reqRespuesta", required = false) String reqRespuesta) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getPrincipal().toString();
 
-        List<InfoArchivoDto> infoArchivoDtoList = iUsuarioService.listarArchivos(username, tipo);
+        List<InfoArchivoDto> infoArchivoDtoList = iUsuarioService.listarArchivos(username, reqRespuesta);
 
         List<InfoArchivoDataRestModel> infoArchivoDataRestModelList = new ArrayList<InfoArchivoDataRestModel>();
 

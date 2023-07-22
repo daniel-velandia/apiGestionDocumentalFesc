@@ -8,13 +8,10 @@ public class UsuarioDto implements Serializable{
     
     private long id;
     private String idUsuario;
-    private String documento;
     private String username;
     private String nombre;
     private String apellido;
     private String correo;
-    private String telefono;
-    private String cargo;
     private String password;
     private String passwordApp;
     private String passwordEncriptada;
@@ -40,14 +37,6 @@ public class UsuarioDto implements Serializable{
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 
     public String getUsername() {
@@ -80,22 +69,6 @@ public class UsuarioDto implements Serializable{
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public String getPassword() {

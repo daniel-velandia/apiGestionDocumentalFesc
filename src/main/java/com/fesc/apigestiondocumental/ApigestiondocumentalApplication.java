@@ -13,8 +13,8 @@ import com.fesc.apigestiondocumental.data.entidades.InfoArchivoEntity;
 import com.fesc.apigestiondocumental.models.peticiones.ArchivoRequestModel;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.utils.AppContexto;
+import com.fesc.apigestiondocumental.utils.Correo;
 import com.fesc.apigestiondocumental.utils.FiltroArchivo;
-import com.fesc.apigestiondocumental.utils.Validaciones;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -63,15 +63,15 @@ public class ApigestiondocumentalApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	@Bean
-	public Validaciones validaciones() {
-		return new Validaciones();
-	}
 
 	@Bean
 	public FiltroArchivo filtroArchivo() {
 		return new FiltroArchivo();
+	}
+
+	@Bean
+	public Correo correo() {
+		return new Correo();
 	}
 
 	@Bean

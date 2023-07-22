@@ -5,8 +5,6 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import com.fesc.apigestiondocumental.Errors.ErrorException;
@@ -25,13 +23,10 @@ import com.fesc.apigestiondocumental.data.repositorios.IUsuarioRepository;
 import com.fesc.apigestiondocumental.shared.ArchivoDto;
 import com.fesc.apigestiondocumental.shared.InfoArchivoDto;
 import com.fesc.apigestiondocumental.shared.RespuestaDto;
-import com.fesc.apigestiondocumental.utils.Validaciones;
+import com.fesc.apigestiondocumental.utils.Correo;
 
 @Service
 public class ArchivoService implements IArchivoService{
-
-    @Autowired
-    JavaMailSenderImpl javaMailSenderImpl;
 
     @Autowired
     IArchivoRepository iArchivoRepository;
@@ -52,15 +47,13 @@ public class ArchivoService implements IArchivoService{
     IUsuarioRepository iUsuarioRepository;
 
     @Autowired
-    ModelMapper modelMapper;
+    Correo correo;
 
     @Autowired
-    Validaciones validaciones;
+    ModelMapper modelMapper;
 
     @Override
     public RespuestaDto crearArchivo(InfoArchivoDto infoArchivoDto) {
-
-        validaciones.validarCamposArchivo(infoArchivoDto);
 
         ArchivoEntity archivoEntity = modelMapper.map(infoArchivoDto.getArchivoEntity(), ArchivoEntity.class);
         InfoArchivoEntity infoArchivoEntity = modelMapper.map(infoArchivoDto, InfoArchivoEntity.class);
@@ -71,7 +64,7 @@ public class ArchivoService implements IArchivoService{
         EmpresaEntity empresaEntity = iEmpresaRepository.findByIdEmpresa(infoArchivoDto.getEmpresa());
         InfoArchivoEntity infoArchivoEntityEntrega = iInfoArchivoRepository.findByIdInfoArchivo(infoArchivoDto.getEntrega());
 
-        enviarMensaje(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
+        correo.enviarCorreo(encargadoEntity.getCorreo(), infoArchivoEntity.getAsunto(), infoArchivoEntity.getAnexos(), 
                     usuarioEntity.getCorreo(), usuarioEntity.getPasswordApp(), infoArchivoDto.isInformarEncargado());
 
         archivoEntity.setIdArchivo(UUID.randomUUID().toString());
@@ -143,8 +136,6 @@ public class ArchivoService implements IArchivoService{
 
     @Override
     public RespuestaDto actualizarArchivo(String id, InfoArchivoDto infoArchivoDto) {
-
-        validaciones.validarCamposArchivo(infoArchivoDto);
         
         InfoArchivoEntity infoArchivoEntityEncontrado = iInfoArchivoRepository.findByIdInfoArchivo(id);
 
@@ -193,30 +184,6 @@ public class ArchivoService implements IArchivoService{
 
     }
 
-    public void enviarMensaje(String para, String sunto, String cuerpo, String correo, String passwordApp, boolean informarEncargado) {
-
-        try {
-            
-            if(passwordApp != null && informarEncargado) {
-
-                SimpleMailMessage mensaje = new SimpleMailMessage();
-
-                mensaje.setTo(para);
-                mensaje.setSubject(sunto);
-                mensaje.setText(cuerpo);
-
-                javaMailSenderImpl.setUsername(correo);
-                javaMailSenderImpl.setPassword(passwordApp);
-                javaMailSenderImpl.send(mensaje);
-                
-            } else if (passwordApp == null && informarEncargado) {
     
-                throw new ErrorException("No has agregado la contraseña de aplicación");
-            }
-
-        } catch (Exception e) {
-            throw new ErrorException("error al enviar email");
-        }
-    }
     
 }
